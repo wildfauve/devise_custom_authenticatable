@@ -5,7 +5,7 @@ module Devise::Strategies
   class CustomAuthenticatable < Authenticatable
 
     def authenticate!
-      resource  = valid_password? && mapping.to.find_for_authentication(authentication_hash)
+      resource  = valid_for_params_auth? && valid_password? && mapping.to.find_for_authentication(authentication_hash)
       return pass unless resource.respond_to?(:valid_for_custom_authentication?)
 
       catch(:skip_custom_strategies) do
