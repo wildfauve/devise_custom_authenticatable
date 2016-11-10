@@ -28,6 +28,8 @@ module Devise::Strategies
         if validate(resource){ resource.valid_for_custom_authentication?(password, auth) }
           resource.after_custom_authentication
           success!(resource)
+        else
+          fail(:failed_minda_auth)
         end
       end
     end
